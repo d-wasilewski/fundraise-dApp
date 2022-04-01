@@ -7,7 +7,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const contractAddress = "0x7B571Adc0366978A455e1E19eE5BCF21EFb27579";
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
   const lotteryContract = new ethers.Contract(
@@ -19,6 +19,8 @@ const getEthereumContract = () => {
   return lotteryContract;
 };
 
+const contract = getEthereumContract();
+
 export const FundraisingProvider = ({ children }) => {
   const [connectedAccount, setConnectedAccount] = useState("");
 
@@ -29,6 +31,15 @@ export const FundraisingProvider = ({ children }) => {
 
     setConnectedAccount(accounts[0]);
   };
+
+  const makeContribution = () => {
+    await contract.contribute({
+      // wysyła 0.01 na zbiorke
+      from: connectedAccount,
+      value: ethers.utils.parseEther("0.01"),
+      gasLimit: 300000,
+    })
+  }
 
   const connectWallet = async () => {
     try {
