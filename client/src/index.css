@@ -1,4 +1,5 @@
 body {
+    --bg-lightness: 0.6;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -6,11 +7,12 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* background-color: #07071c; */
+    position: relative;
     background: linear-gradient(
         68deg,
-        rgba(247, 37, 133, 1) 0%,
-        rgba(114, 9, 183, 1) 36%,
-        rgba(58, 12, 163, 1) 87%
+        hsl(332.6, 92.9%, calc(55.7% * var(--bg-lightness))) 0%,
+        hsl(276.2, 90.6%, calc(37.6% * var(--bg-lightness))) 36%,
+        hsl(258.3, 86.3%, calc(34.3% * var(--bg-lightness))) 87%
     );
 }
 
