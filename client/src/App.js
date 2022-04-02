@@ -1,23 +1,22 @@
-import { useContext } from "react";
-import "./App.css";
-import { FundraisingContext } from "./context/FundraisingContext";
+import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import AdminPage from './pages/AdminPage';
+import DetailsPage from './pages/DetailsPage';
+import MainPage from './pages/MainPage';
 
 function App() {
-  const { connectWallet, connectedAccount } = useContext(FundraisingContext);
-
   return (
-    <div className="App">
-      <h1
-        style={{
-          color: "#e0eaf4",
-        }}
-      >
-        Fundraising app
-      </h1>
-      <button onClick={connectWallet} className={"buttonGradient"}>
-        {connectedAccount ? connectedAccount : "CONNECT WALLET"}
-      </button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/details/:id" element={<DetailsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
