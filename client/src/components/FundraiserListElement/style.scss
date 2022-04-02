@@ -1,0 +1,46 @@
+.itemWrapper {
+    background-color: white;
+    width: 23rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3), -3px -3px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease-in-out;
+    img {
+        height: 15rem;
+        object-fit: cover;
+    }
+
+    .item {
+        padding: 1.5rem;
+
+        h1 {
+            font-size: 1.6rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.2rem;
+        }
+        p {
+            text-align: justify;
+            // text-overflow: ellipsis;/
+            // overflow: hidden;
+            // inline-size: 2rem;
+
+            // line-clamp: 2;
+        }
+        .progressBar {
+            width: 100%;
+            height: 1.5em;
+            background: linear-gradient(
+                68deg,
+                rgba(58, 12, 163, 0.8) 0%,
+                rgba(67, 97, 238, 0.8) 65%,
+                rgba(76, 201, 240, 0.8) 89%
+            );
+        }
+    }
+}
+
+.itemWrapper:hover {
+    transform: rotateX(13deg), translateZ(14px);
+}
