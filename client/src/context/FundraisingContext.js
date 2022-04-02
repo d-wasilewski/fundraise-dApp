@@ -32,14 +32,14 @@ export const FundraisingProvider = ({ children }) => {
     setConnectedAccount(accounts[0]);
   };
 
-  const makeContribution = () => {
+  const makeContribution = async () => {
     await contract.contribute({
       // wysyła 0.01 na zbiorke
       from: connectedAccount,
       value: ethers.utils.parseEther("0.01"),
       gasLimit: 300000,
-    })
-  }
+    });
+  };
 
   const connectWallet = async () => {
     try {
