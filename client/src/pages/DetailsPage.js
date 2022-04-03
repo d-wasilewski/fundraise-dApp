@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 // import Grid from "@mui/material/Grid";
 // import Box from "@mui/material/Box";
 // import Paper from "@mui/material/Paper";
@@ -7,6 +7,8 @@ import { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { FundraisingContext } from "../context/FundraisingContext";
 import ContributorsIcon from "../icons/friends.png";
+import ProgressBar from "../components/ProgressBar";
+// import "../components/FundraiserListElement/style.scss";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,6 +20,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const DetailsPage = () => {
     const { id } = useParams();
+    const location = useLocation();
+    const { fundraiser } = location.state;
+
     const { connectWallet, connectedAccount } = useContext(FundraisingContext);
 
     const [donatingAmount, setDonatingAmount] = useState("");
@@ -31,20 +36,20 @@ const DetailsPage = () => {
         console.log("Wplaciles " + donatingAmount);
     };
 
-    const [fundraiser, setFundraiser] = useState({
-        index: id,
-        title: "Fundraiser #1",
-        descripton: "Fundraiser #1 Description",
-        raisedamount: 100,
-        goalamount: 200,
-        transactionhistory: [
-            {
-                name: "asckjdscksc",
-                amount: 10,
-            },
-            {},
-        ],
-    });
+    // const [fundraiser, setFundraiser] = useState({
+    //     index: id,
+    //     title: "Fundraiser #1",
+    //     descripton: "Fundraiser #1 Description",
+    //     raisedamount: 100,
+    //     goalamount: 200,
+    //     transactionhistory: [
+    //         {
+    //             name: "asckjdscksc",
+    //             amount: 10,
+    //         },
+    //         {},
+    //     ],
+    // });
 
     const donate = () => {
         console.log(`Donating ${donatingAmount} ETH from ${connectedAccount}`);
@@ -59,15 +64,15 @@ const DetailsPage = () => {
                     xs={12}
                     sm={12}
                     sx={{
-                        height: 100,
+                        height: 60,
                         color: "white",
-                        backgroundColor: "green",
+                        // backgroundColor: "green",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "left",
                     }}
                 >
-                    HEADER
+                    {/* HEADER */}
                 </Grid>
                 <Grid
                     item
@@ -91,7 +96,7 @@ const DetailsPage = () => {
                             sx={{
                                 maxHeight: 300,
                                 color: "white",
-                                backgroundColor: "red",
+                                // backgroundColor: "red",
                             }}
                         >
                             {/* TODO: Zrobic max liczbe znakow do tytułu zbiórki */}
@@ -111,7 +116,7 @@ const DetailsPage = () => {
                             item
                             xs={7}
                             sx={{
-                                backgroundColor: "blue",
+                                // backgroundColor: "blue",
                                 color: "white",
                                 display: "flex",
                                 justifyContent: "center",
@@ -125,7 +130,8 @@ const DetailsPage = () => {
                                     borderRadius: "10px",
                                 }}
                                 alt="FundraiserPhoto"
-                                src="https://zrzutka.pl/uploads/chipin/ebxbuu/cover/orginal/c984291683bfbbed215e67903118e65d.jpeg"
+                                src={fundraiser.image}
+                                // src="https://zrzutka.pl/uploads/chipin/ebxbuu/cover/orginal/c984291683bfbbed215e67903118e65d.jpeg"
                                 // src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG98ZW58MHx8MHx8&w=1000&q=80"
                                 // src="https://cdn.icon-icons.com/icons2/2596/PNG/512/check_one_icon_155665.png"
                             />
@@ -133,7 +139,7 @@ const DetailsPage = () => {
                         <Grid
                             item
                             xs={5}
-                            sx={{ backgroundColor: "pink", color: "white" }}
+                            // sx={{ backgroundColor: "pink", color: "white" }}
                         >
                             <Box
                                 sx={{
@@ -149,7 +155,7 @@ const DetailsPage = () => {
                                             fontSize: "40px",
                                         }}
                                     >
-                                        {fundraiser.raisedamount} ETH
+                                        {fundraiser.amount} ETH
                                     </Typography>
                                     <Typography
                                         sx={{
@@ -158,9 +164,14 @@ const DetailsPage = () => {
                                             marginLeft: "10px",
                                         }}
                                     >
-                                        z {fundraiser.goalamount} ETH
+                                        z {fundraiser.goal} ETH
                                     </Typography>
                                 </Box>
+                                {/* <ProgressBar
+                                    amount={fundraiser.amount}
+                                    goal={fundraiser.goal}
+                                    className="progressBar"
+                                /> */}
                                 <Box sx={{ width: "100%", marginLeft: 5 }}>
                                     <Typography
                                         sx={{
@@ -199,7 +210,7 @@ const DetailsPage = () => {
                                         }}
                                     />
                                     <Typography sx={{ fontWeight: "bold" }}>
-                                        {fundraiser.transactionhistory.length}{" "}
+                                        {/* {fundraiser.transactionhistory.length}{" "} */}
                                         wspierających
                                     </Typography>
                                 </Box>
@@ -263,7 +274,7 @@ const DetailsPage = () => {
                             Opis zrzutki
                         </Typography>
                         <Typography sx={{ color: "white" }}>
-                            {fundraiser.descripton}
+                            {fundraiser.description}
                         </Typography>
                     </Box>
                 </Grid>

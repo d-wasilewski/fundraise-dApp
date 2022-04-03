@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import FundraiserListElement from "../FundraiserListElement";
+import { Link } from "react-router-dom";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -40,7 +41,7 @@ const FundraiserList = () => {
         },
         {
             index: 2,
-            title: "Fundraiser #1",
+            title: "Fundraiser #3",
             description:
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, pariatur atque mollitia, vel iusto in consequatur, quos facere vero beatae possimus quas accusamus vitae sunt?",
             amount: 1294,
@@ -49,7 +50,7 @@ const FundraiserList = () => {
         },
         {
             index: 3,
-            title: "Fundraiser #2",
+            title: "Fundraiser #4",
             description:
                 "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis nesciunt animi enim corrupti nam dolores, repudiandae necessitatibus? Dolor, totam repudiandae?",
             amount: 1093,
@@ -68,14 +69,21 @@ const FundraiserList = () => {
             <div className="list-wrapper">
                 <div className="list">
                     {fundraiserList?.map((fundraiser) => (
-                        <FundraiserListElement
+                        <Link
+                            to={`/details/${fundraiser.index}`}
                             key={fundraiser.index}
-                            title={fundraiser.title}
-                            description={fundraiser.description}
-                            amount={fundraiser.amount}
-                            goal={fundraiser.goal}
-                            image={fundraiser.image}
-                        />
+                            style={{ textDecoration: "none" }}
+                            state={{ fundraiser: fundraiser }}
+                        >
+                            <FundraiserListElement
+                                key={fundraiser.index}
+                                title={fundraiser.title}
+                                description={fundraiser.description}
+                                amount={fundraiser.amount}
+                                goal={fundraiser.goal}
+                                image={fundraiser.image}
+                            />
+                        </Link>
                     ))}
                 </div>
 
