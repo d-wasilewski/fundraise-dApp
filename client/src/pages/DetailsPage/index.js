@@ -75,9 +75,7 @@ const DetailsPage = () => {
                 <div className="fundraiser-info">
                     <div className="fundraiser-description">
                         <p className="description-title">Opis zrzutki</p>
-                        <p className="description-text">
-                            JESZCZE NIE MA{/* {fundraiser.description} */}
-                        </p>
+                        <p className="description-text">{description}</p>
                     </div>
                     <div className="fundraiser-donate">
                         <p className="first-text">
@@ -107,7 +105,8 @@ const DetailsPage = () => {
                                 <form onSubmit={handleSubmit} className="form">
                                     <input
                                         className="amountInput"
-                                        type="number"
+                                        type="text"
+                                        onChange={handleInputChange}
                                         name="amount"
                                         required
                                     />
