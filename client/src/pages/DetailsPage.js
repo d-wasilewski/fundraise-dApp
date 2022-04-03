@@ -3,29 +3,34 @@ import { useLocation, useParams } from "react-router-dom";
 // import Box from "@mui/material/Box";
 // import Paper from "@mui/material/Paper";
 import { Grid, Box, Paper, Typography, Button, TextField } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { FundraisingContext } from "../context/FundraisingContext";
 import ContributorsIcon from "../icons/friends.png";
 import ProgressBar from "../components/ProgressBar";
 // import "../components/FundraiserListElement/style.scss";
+import { ethers } from "ethers";
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+//     ...theme.typography.body2,
+//     padding: theme.spacing(1),
+//     textAlign: "center",
+//     color: theme.palette.text.secondary,
+// }));
 
 const DetailsPage = () => {
     const { id } = useParams();
-    const location = useLocation();
-    const { fundraiser } = location.state;
+    //const location = useLocation();
 
-    const { connectWallet, connectedAccount } = useContext(FundraisingContext);
+    //const { fundraiser } = location.state;
+
+    const { connectWallet, connectedAccount, getNewContractGivenItsAddress } =
+        useContext(FundraisingContext);
 
     const [donatingAmount, setDonatingAmount] = useState("");
+
+    const [contract, setContract] = useState(undefined);
 
     const handleInputChange = (e) => {
         setDonatingAmount(e.target.value);
@@ -36,24 +41,23 @@ const DetailsPage = () => {
         console.log("Wplaciles " + donatingAmount);
     };
 
-    // const [fundraiser, setFundraiser] = useState({
-    //     index: id,
-    //     title: "Fundraiser #1",
-    //     descripton: "Fundraiser #1 Description",
-    //     raisedamount: 100,
-    //     goalamount: 200,
-    //     transactionhistory: [
-    //         {
-    //             name: "asckjdscksc",
-    //             amount: 10,
-    //         },
-    //         {},
-    //     ],
-    // });
+    const [balance, setBalance] = useState(0);
+    const [goal, setGoal] = useState(0);
+    const [deadline, setDeadline] = useState(0);
+    const [owner, setOwner] = useState("");
 
-    const donate = () => {
-        console.log(`Donating ${donatingAmount} ETH from ${connectedAccount}`);
-    };
+    useEffect(async () => {
+        let c = await getNewContractGivenItsAddress(id);
+        const dataBalance = await c.raisedAmount();
+        setBalance(ethers.utils.formatEther(dataBalance));
+        const dataGoal = await c.goal();
+        setGoal(ethers.utils.formatEther(dataGoal));
+        const dataDeadline = await c.deadline();
+        setDeadline(ethers.utils.formatEther(dataDeadline));
+        const dataOwner = await c.admin();
+        setOwner(ethers.utils.formatEther(dataOwner));
+        setContract(c);
+    });
 
     return (
         <div>
@@ -108,9 +112,10 @@ const DetailsPage = () => {
                                     fontWeight: "bold",
                                 }}
                             >
-                                {fundraiser.title}
+                                {/* {fundraiser.title} */}
+                                JESZCZE NIE MA
                             </Typography>
-                            <Typography>Zalozyciel zbiorki?</Typography>
+                            <Typography>Zalozyciel zbiorki: {owner}</Typography>
                         </Grid>
                         <Grid
                             item
@@ -130,10 +135,11 @@ const DetailsPage = () => {
                                     borderRadius: "10px",
                                 }}
                                 alt="FundraiserPhoto"
-                                src={fundraiser.image}
+                                //src={fundraiser.image}
                                 // src="https://zrzutka.pl/uploads/chipin/ebxbuu/cover/orginal/c984291683bfbbed215e67903118e65d.jpeg"
                                 // src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG98ZW58MHx8MHx8&w=1000&q=80"
                                 // src="https://cdn.icon-icons.com/icons2/2596/PNG/512/check_one_icon_155665.png"
+                                src="http://placekitten.com/400/600"
                             />
                         </Grid>
                         <Grid
@@ -155,7 +161,7 @@ const DetailsPage = () => {
                                             fontSize: "40px",
                                         }}
                                     >
-                                        {fundraiser.amount} ETH
+                                        {balance} ETH
                                     </Typography>
                                     <Typography
                                         sx={{
@@ -164,12 +170,12 @@ const DetailsPage = () => {
                                             marginLeft: "10px",
                                         }}
                                     >
-                                        z {fundraiser.goal} ETH
+                                        z {goal} ETH
                                     </Typography>
                                 </Box>
                                 <ProgressBar
-                                    amount={fundraiser.amount}
-                                    goal={fundraiser.goal}
+                                    amount={balance}
+                                    goal={goal}
                                     className="progressBar"
                                 />
                                 <Box sx={{ width: "100%", marginLeft: 5 }}>
@@ -274,7 +280,8 @@ const DetailsPage = () => {
                             Opis zrzutki
                         </Typography>
                         <Typography sx={{ color: "white" }}>
-                            {fundraiser.description}
+                            JESZCZE NIE MA
+                            {/* {fundraiser.description} */}
                         </Typography>
                     </Box>
                 </Grid>

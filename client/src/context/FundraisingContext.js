@@ -54,7 +54,7 @@ export const FundraisingProvider = ({ children }) => {
 
     const getListOfContracts = async () => {
         const fundings = await contract.allFundings();
-        console.log("List of addresses", fundings);
+        //console.log("List of addresses", fundings);
 
         // Example: creates contract instances on every fundraise address
         const contracts = fundings.map((a) => {
@@ -62,7 +62,7 @@ export const FundraisingProvider = ({ children }) => {
             return n;
         });
 
-        console.log("Contracts: ", contracts);
+        //console.log("Contracts: ", contracts);
         setContractsList(contracts);
 
         return contracts;
@@ -76,9 +76,9 @@ export const FundraisingProvider = ({ children }) => {
             fundraisingContractABI.abi,
             signer
         );
-        console.log("Nowy contract", newContract);
+        //console.log("Nowy contract", newContract);
         // example: returns balance of newly created fundraise instance
-        // const balance = await newContract.getBalance();
+        // const balance = newContract.getBalance();
         // console.log("Balance in ETH: ", ethers.utils.formatEther(balance));
         // this would call contribute function on each
         // await newContract.contribute({
@@ -116,6 +116,7 @@ export const FundraisingProvider = ({ children }) => {
                 connectWallet,
                 connectedAccount,
                 contractsList,
+                getNewContractGivenItsAddress,
             }}
         >
             {children}

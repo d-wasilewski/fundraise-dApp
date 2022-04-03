@@ -5,13 +5,29 @@ import RoundIconButton from "../RoundIconButton";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Countdown from "react-countdown";
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 
 const FundraiserListElement = ({ data }) => {
+    const [balance, setBalance] = useState(0);
+    const [goal, setGoal] = useState(0);
+    const [deadline, setDeadline] = useState(0);
+
+    useEffect(async () => {
+        console.log(data);
+        const dataBalance = await data.raisedAmount();
+        setBalance(ethers.utils.formatEther(dataBalance));
+        const dataGoal = await data.goal();
+        setGoal(ethers.utils.formatEther(dataGoal));
+        const dataDeadline = await data.deadline();
+        setDeadline(ethers.utils.formatEther(dataDeadline));
+    }, []);
+
     return (
         <div className="card">
             <div className="item-wrapper">
                 <div className="countdown">
-                    <Countdown
+                    {/* <Countdown
                         date={new Date(data.end)}
                         renderer={({
                             days,
@@ -51,11 +67,14 @@ const FundraiserListElement = ({ data }) => {
                                 );
                             }
                         }}
-                    />
+                    /> */}
                 </div>
-                <img src={data.image} alt="Fundraise background image" />
+                <img
+                    src="http://placekitten.com/400/600"
+                    alt="Fundraise background image"
+                />
                 <Link
-                    to={`/details/${data.index}`}
+                    to={`/details/${data.address}`}
                     state={{ fundraiser: data }}
                     className="link"
                 >
@@ -63,14 +82,14 @@ const FundraiserListElement = ({ data }) => {
                         <FaArrowRight />
                     </RoundIconButton>
                 </Link>
-
+                {/*
                 <div className="item">
                     <h1>{data.title}</h1>
                     <p>{`${data.description.substring(0, 120)}${
                         data.description.length < 120 ? "" : "..."
                     }`}</p>
                     <ProgressBar amount={data.amount} goal={data.goal} />
-                </div>
+                </div> */}
             </div>
         </div>
     );
