@@ -12,6 +12,8 @@ const FundraiserListElement = ({ data }) => {
     const [balance, setBalance] = useState(0);
     const [goal, setGoal] = useState(0);
     const [deadline, setDeadline] = useState(0);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
     useEffect(async () => {
         console.log(data);
@@ -20,15 +22,19 @@ const FundraiserListElement = ({ data }) => {
         const dataGoal = await data.goal();
         setGoal(ethers.utils.formatEther(dataGoal));
         const dataDeadline = await data.deadline();
-        setDeadline(ethers.utils.formatEther(dataDeadline));
+        setDeadline(dataDeadline.toString());
+        const dataTitle = await data.title();
+        setTitle(dataTitle);
+        const dataDescription = await data.description();
+        setDescription(dataDescription);
     }, []);
 
     return (
         <div className="card">
             <div className="item-wrapper">
                 <div className="countdown">
-                    {/* <Countdown
-                        date={new Date(data.end)}
+                    <Countdown
+                        date={new Date(parseInt(deadline))}
                         renderer={({
                             days,
                             hours,
@@ -67,7 +73,7 @@ const FundraiserListElement = ({ data }) => {
                                 );
                             }
                         }}
-                    /> */}
+                    />
                 </div>
                 <img
                     src="http://placekitten.com/400/600"
@@ -82,14 +88,14 @@ const FundraiserListElement = ({ data }) => {
                         <FaArrowRight />
                     </RoundIconButton>
                 </Link>
-                {/*
+
                 <div className="item">
-                    <h1>{data.title}</h1>
-                    <p>{`${data.description.substring(0, 120)}${
-                        data.description.length < 120 ? "" : "..."
+                    <h1>{title}</h1>
+                    <p>{`${description.substring(0, 120)}${
+                        description.length < 120 ? "" : "..."
                     }`}</p>
-                    <ProgressBar amount={data.amount} goal={data.goal} />
-                </div> */}
+                    <ProgressBar amount={balance} goal={goal} />
+                </div>
             </div>
         </div>
     );

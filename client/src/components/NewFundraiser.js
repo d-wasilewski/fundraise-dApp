@@ -19,7 +19,7 @@ const NewFundraiser = (props) => {
         //   date > Date.now()
         // ) {
 
-        createFunding(amount, deadline, title, description);
+        createFunding(amount, Date.parse(deadline), title, description);
 
         props.parentCallback(false);
         // }
@@ -58,9 +58,11 @@ const NewFundraiser = (props) => {
             <div>
                 <label>End date</label>
                 <input
+                    type="date"
                     value={deadline}
                     onChange={(e) => setDeadline(e.target.value)}
                 ></input>
+                <label>days</label>
             </div>
 
             {connectedAccount ? (

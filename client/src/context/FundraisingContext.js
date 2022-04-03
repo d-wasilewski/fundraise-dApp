@@ -9,7 +9,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-    const contractAddress = "0x738f544dD8782a2ACb5A72b9dCC1DD3B6fF63745";
+    const contractAddress = "0x768456bfb4E23cf47a4A57E9971F38bE75bfa57b";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
     const wallet = new ethers.Wallet(walletAddress, provider);
@@ -41,10 +41,15 @@ export const FundraisingProvider = ({ children }) => {
         setConnectedAccount(accounts[0]);
     };
 
-    const createFunding = async (amountInEth, deadline) => {
+    const createFunding = async (amountInEth, deadline, title, description) => {
         console.log("Creating new fundraise");
         try {
-            await contract.createFunding(amountInEth, deadline);
+            await contract.createFunding(
+                amountInEth,
+                deadline,
+                title,
+                description
+            );
         } catch (e) {
             console.log("Error: ", e);
         }
@@ -87,6 +92,22 @@ export const FundraisingProvider = ({ children }) => {
         return newContract;
     };
 
+    const donate = async (amount, address) => {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const newContract = new ethers.Contract(
+            address,
+            fundraisingContractABI.abi,
+            signer
+        );
+        console.log("Donate function: ", newContract, connectedAccount, amount);
+        await newContract.contribute({
+            from: connectedAccount,
+            value: ethers.utils.parseEther(amount),
+            gasLimit: 300000,
+        });
+    };
+
     const connectWallet = async () => {
         try {
             if (!ethereum) return alert("Please install metamask!");
@@ -116,6 +137,7 @@ export const FundraisingProvider = ({ children }) => {
                 contractsList,
                 getNewContractGivenItsAddress,
                 createFunding,
+                donate,
             }}
         >
             {children}

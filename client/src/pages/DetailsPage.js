@@ -20,31 +20,37 @@ import { ethers } from "ethers";
 // }));
 
 const DetailsPage = () => {
-    const { id } = useParams();
     //const location = useLocation();
 
     //const { fundraiser } = location.state;
 
-    const { connectWallet, connectedAccount, getNewContractGivenItsAddress } =
-        useContext(FundraisingContext);
-
     const [donatingAmount, setDonatingAmount] = useState("");
-
+    const { id } = useParams();
     const [contract, setContract] = useState(undefined);
-
-    const handleInputChange = (e) => {
-        setDonatingAmount(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Wplaciles " + donatingAmount);
-    };
+    const {
+        connectWallet,
+        connectedAccount,
+        getNewContractGivenItsAddress,
+        donate,
+    } = useContext(FundraisingContext);
 
     const [balance, setBalance] = useState(0);
     const [goal, setGoal] = useState(0);
     const [deadline, setDeadline] = useState(0);
     const [owner, setOwner] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+
+    const handleInputChange = (e) => {
+        setDonatingAmount(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Wplaciles " + contract.address);
+        console.log("Wplaciles " + donatingAmount);
+        await donate(donatingAmount, contract.address);
+    };
 
     useEffect(async () => {
         let c = await getNewContractGivenItsAddress(id);
@@ -56,8 +62,15 @@ const DetailsPage = () => {
         setDeadline(ethers.utils.formatEther(dataDeadline));
         const dataOwner = await c.admin();
         setOwner(ethers.utils.formatEther(dataOwner));
+
+        const dataTitle = await c.title();
+        setTitle(dataTitle);
+        const dataDescription = await c.description();
+        setDescription(dataDescription);
+
         setContract(c);
-    });
+        console.log(c);
+    }, []);
 
     return (
         <div>
