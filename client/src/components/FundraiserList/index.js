@@ -28,7 +28,7 @@ const FundraiserList = () => {
             amount: 3094,
             goal: 5420,
             image: "http://placekitten.com/400/500",
-            end: "2022-05-09T00:00:00+01:00",
+            end: "2022-05-09T23:59:59+01:00",
         },
         {
             index: 1,
@@ -38,7 +38,7 @@ const FundraiserList = () => {
             amount: 300,
             goal: 4500,
             image: "http://placekitten.com/400/480",
-            end: "2022-04-05T00:00:00+01:00",
+            end: "2022-04-05T23:59:59+01:00",
         },
         {
             index: 2,
@@ -48,7 +48,7 @@ const FundraiserList = () => {
             amount: 1294,
             goal: 2137,
             image: "http://placekitten.com/400/450",
-            end: "2022-04-03T00:00:00+01:00",
+            end: "2022-04-03T23:59:59+01:00",
         },
         {
             index: 3,
@@ -58,7 +58,7 @@ const FundraiserList = () => {
             amount: 1093,
             goal: 2094,
             image: "http://placekitten.com/400/600",
-            end: "2022-05-09T00:00:00+01:00",
+            end: "2022-03-09T23:59:59+01:00",
         },
     ]);
 
