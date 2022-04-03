@@ -19,7 +19,7 @@ const NewFundraiser = (props) => {
         //   date > Date.now()
         // ) {
 
-        createFunding(amount, deadline);
+        createFunding(amount, deadline, title, description);
 
         props.parentCallback(false);
         // }
