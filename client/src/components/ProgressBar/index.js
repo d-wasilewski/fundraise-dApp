@@ -18,7 +18,7 @@ const ProgressBar = ({ amount, goal, className }) => {
                     setWidth(el.getBoundingClientRect().width);
 
                     // console.log("later", width);
-                }, 1000);
+                }, 500);
             }}
         >
             <div

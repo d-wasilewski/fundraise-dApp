@@ -21,7 +21,7 @@ const MainPage = () => {
 
     return (
         <div className="App">
-            <h1
+            {/* <h1
                 style={{
                     color: "#e0eaf4",
                 }}
@@ -51,7 +51,7 @@ const MainPage = () => {
             )}
 
             <Button>Lorem, ipsum.</Button>
-            <SearchBar></SearchBar>
+            <SearchBar></SearchBar> */}
 
             <FundraiserList />
         </div>

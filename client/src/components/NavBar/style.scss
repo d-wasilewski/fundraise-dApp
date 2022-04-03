@@ -1,0 +1,19 @@
+.navbar {
+    height: 5rem;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    z-index: 100;
+    position: sticky;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    .search {
+        margin-left: auto;
+    }
+    .button {
+        height: 3rem;
+    }
+}
