@@ -30,16 +30,9 @@ const MainPage = () => {
             </h1>
             <button onClick={connectWallet} className="buttonGradient">
                 {connectedAccount ? connectedAccount : "CONNECT WALLET"}
-            </button>
+            </button> */}
 
             {newFoundraiserPopup ? (
-                // <ReactCSSTransitionGroup
-                //   transitionName="example"
-                //   transitionEnterTimeout={500}
-                //   transitionLeaveTimeout={300}
-                // >
-                //
-                // </ReactCSSTransitionGroup>
                 <NewFundraiser parentCallback={callbackFunction} />
             ) : (
                 <button
@@ -50,7 +43,7 @@ const MainPage = () => {
                 </button>
             )}
 
-            <Button>Lorem, ipsum.</Button>
+            {/* <Button>Lorem, ipsum.</Button>
             <SearchBar></SearchBar> */}
 
             <FundraiserList />

@@ -117,6 +117,7 @@ export const FundraisingProvider = ({ children }) => {
                 connectedAccount,
                 contractsList,
                 getNewContractGivenItsAddress,
+                createFunding,
             }}
         >
             {children}

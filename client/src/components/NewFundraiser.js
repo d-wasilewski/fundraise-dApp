@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { FundraisingContext } from "../context/FundraisingContext";
 
 const NewFundraiser = (props) => {
-    const { connectWallet, connectedAccount } = useContext(FundraisingContext);
+    const { connectWallet, connectedAccount, createFunding } =
+        useContext(FundraisingContext);
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
-    const [date, setDate] = useState(Date);
+    const [deadline, setDeadline] = useState(0);
 
     function addNew() {
         // if (
@@ -17,6 +18,9 @@ const NewFundraiser = (props) => {
         //   amount > 0 &&
         //   date > Date.now()
         // ) {
+
+        createFunding(amount, deadline);
+
         props.parentCallback(false);
         // }
     }
@@ -54,9 +58,8 @@ const NewFundraiser = (props) => {
             <div>
                 <label>End date</label>
                 <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                    value={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}
                 ></input>
             </div>
 
