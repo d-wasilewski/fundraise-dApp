@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from "react";
 
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { useNavigate } from 'react-router-dom';
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
+import { FundraisingContext } from "../context/FundraisingContext";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
 const FundraiserList = () => {
   const navigate = useNavigate();
+  const { contractsList } = useContext(FundraisingContext);
 
   const [fundraiserlist, setFundraiserlist] = useState([
     {
       index: 0,
-      title: 'Fundraiser #1',
-      descripton: 'Fundraiser #1 Description',
+      title: "Fundraiser #1",
+      descripton: "Fundraiser #1 Description",
       raisedamount: 100,
       goalamount: 200,
     },
     {
       index: 1,
-      title: 'Fundraiser #2',
-      descripton: 'Fundraiser #2 Description',
+      title: "Fundraiser #2",
+      descripton: "Fundraiser #2 Description",
       raisedamount: 100,
       goalamount: 200,
     },
@@ -36,6 +38,8 @@ const FundraiserList = () => {
 
   useEffect(() => {
     //fetch data'
+
+    console.log("Na froncie: ", contractsList);
   }, []);
 
   return (
@@ -56,7 +60,7 @@ const FundraiserList = () => {
                     <button
                       className="buttonGradient"
                       onClick={() => {
-                        let link = '/details/' + fundraiser.index;
+                        let link = "/details/" + fundraiser.index;
                         navigate(link);
                       }}
                     >

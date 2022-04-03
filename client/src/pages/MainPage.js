@@ -1,19 +1,16 @@
-import { useContext, useState } from 'react';
-import FundraiserList from '../components/FundraiserList';
-import NewFundraiser from '../components/NewFundraiser';
-import { FundraisingContext } from '../context/FundraisingContext';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import FundraiserList from "../components/FundraiserList";
+import NewFundraiser from "../components/NewFundraiser";
+import { FundraisingContext } from "../context/FundraisingContext";
+import { useNavigate } from "react-router-dom";
 // import { CSSTransitionGroup } from 'react-transition-group';
 
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const { connectWallet, connectedAccount } = useContext(
-    FundraisingContext
-  );
+  const { connectWallet, connectedAccount } = useContext(FundraisingContext);
 
-  const [newFoundraiserPopup, setnewFoundraiserPopup] =
-    useState(false);
+  const [newFoundraiserPopup, setnewFoundraiserPopup] = useState(false);
 
   const callbackFunction = (status) => {
     setnewFoundraiserPopup(status);
@@ -23,13 +20,13 @@ const MainPage = () => {
     <div className="App">
       <h1
         style={{
-          color: '#e0eaf4',
+          color: "#e0eaf4",
         }}
       >
         Fundraising app
       </h1>
       <button onClick={connectWallet} className="buttonGradient">
-        {connectedAccount ? connectedAccount : 'CONNECT WALLET'}
+        {connectedAccount ? connectedAccount : "CONNECT WALLET"}
       </button>
 
       {newFoundraiserPopup ? (

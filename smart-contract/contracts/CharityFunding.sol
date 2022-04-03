@@ -1,22 +1,26 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.6.0 <0.9.0;
 
-// contract FundingCreator {
-//     CharityFunding[] public fundings;
+contract FundingCreator {
+    CharityFunding[] public fundings;
 
-//     function createFunding(uint fundingGoal, uint fundingDeadline) public {
-//         CharityFunding charityFunding = new CharityFunding(fundingGoal, fundingDeadline, msg.sender);
-//         fundings.push(charityFunding);
-//     }
-// }
+    function createFunding(uint fundingGoal, uint fundingDeadline) public {
+        CharityFunding charityFunding = new CharityFunding(fundingGoal, fundingDeadline, msg.sender);
+        fundings.push(charityFunding);
+    }
+
+    function allFundings() public view returns (CharityFunding[] memory) {
+        return fundings;
+    }
+}
 
 contract CharityFunding {
-    address admin;
-    uint numberOfContributors;
-    uint raisedAmount;
-    uint minimumContribution;
-    uint goal;
-    uint deadline;
+    address public admin;
+    uint public numberOfContributors;
+    uint public raisedAmount;
+    uint public minimumContribution;
+    uint public goal;
+    uint public deadline;
 
     mapping(address => uint) contributors;
 
