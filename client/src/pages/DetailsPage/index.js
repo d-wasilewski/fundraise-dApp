@@ -61,10 +61,6 @@ const DetailsPage = () => {
     return (
         <div className="details-wrapper">
             <div className="container">
-                {/* <div className="fundraiser-title">
-                    {fundraiser.title}
-                    JESZCZE NIE MA
-                </div> */}
                 <div className="fundraiser-photo">
                     <img
                         src="http://placekitten.com/400/600"
@@ -72,15 +68,21 @@ const DetailsPage = () => {
                         className="photo"
                     />
                 </div>
+                <div className="fundraiser-title">
+                    {/* {fundraiser.title} */}
+                    Fundraiser title
+                </div>
                 <div className="fundraiser-info">
                     <div className="fundraiser-description">
-                        <p className="description-title">Opis zrzutki</p>
+                        <p className="description-title">Description</p>
                         <p className="description-text">{description}</p>
                     </div>
                     <div className="fundraiser-donate">
                         <p className="first-text">
                             {balance} ETH{" "}
-                            <span className="second-text">z {goal} ETH</span>
+                            <span className="second-text">
+                                out of {goal} ETH
+                            </span>
                         </p>
                         <ProgressBar
                             amount={balance}
@@ -88,18 +90,14 @@ const DetailsPage = () => {
                             className="progressBar"
                         />
                         <p className="first-text">
-                            Liczba dni{" "}
-                            <span className="second-text">do końca</span>
+                            N <span className="second-text">days left</span>
                         </p>
-                        <p className="donators">
+                        <div className="donators">
                             <FaUserFriends size={40} />
                             <p className="first-text">
-                                ileś{" "}
-                                <span className="second-text">
-                                    wspierających
-                                </span>
+                                N <span className="second-text">donators</span>
                             </p>
-                        </p>
+                        </div>
                         {connectedAccount ? (
                             <>
                                 <form onSubmit={handleSubmit} className="form">
