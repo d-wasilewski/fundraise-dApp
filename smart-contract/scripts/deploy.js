@@ -2,15 +2,21 @@ const main = async () => {
   const charityFundingFactory = await hre.ethers.getContractFactory(
     "FundingCreator"
   );
-  // const charityFunding = await charityFundingFactory.deploy(
-  //   1000,
-  //   100000,
-  //   "0x5429Fa166B6f8bfd3BD3De4027D5a458104ABb5e"
-  // );
   const creator = await charityFundingFactory.deploy();
   await creator.deployed();
 
-  console.log("Contract address:", creator.address);
+  const charityFunding = await hre.ethers.getContractFactory("CharityFunding");
+  const fundraise = await charityFunding.deploy(
+    1,
+    1000,
+    "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    "title",
+    "description"
+  );
+  await fundraise.deployed();
+
+  console.log("Contract factory address:", creator.address);
+  console.log("Contract address:", fundraise.address);
 };
 
 const runMain = async () => {

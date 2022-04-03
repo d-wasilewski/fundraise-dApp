@@ -58,6 +58,11 @@ contract CharityFunding {
         contribute();
     }
 
+    function withdraw() public payable  {
+        payable(admin).transfer(address(this).balance);
+    }
+
+
     function getBalance() public view returns(uint) {
         return address(this).balance;
     }
