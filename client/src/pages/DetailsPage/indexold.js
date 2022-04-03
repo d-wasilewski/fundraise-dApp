@@ -1,14 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
-// import Grid from "@mui/material/Grid";
-// import Box from "@mui/material/Box";
-// import Paper from "@mui/material/Paper";
 import { Grid, Box, Paper, Typography, Button, TextField } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { FundraisingContext } from "../context/FundraisingContext";
-import ContributorsIcon from "../icons/friends.png";
-import ProgressBar from "../components/ProgressBar";
-// import "../components/FundraiserListElement/style.scss";
+import { FundraisingContext } from "../../context/FundraisingContext";
+import ContributorsIcon from "../../icons/friends.png";
+import ProgressBar from "../../components/ProgressBar";
+import "./style.scss";
 import { ethers } from "ethers";
 
 // const Item = styled(Paper)(({ theme }) => ({
@@ -62,27 +59,16 @@ const DetailsPage = () => {
     return (
         <div>
             {/* <h1>DetailsPage about {fundraiser.id} fund-raiser</h1> */}
-            <Grid container sx={{ width: "100%", height: "100%" }}>
+            <Grid
+                container
+                sx={{ width: "100%", height: "100%", display: "flex" }}
+            >
                 <Grid
                     item
                     xs={12}
                     sm={12}
-                    sx={{
-                        height: 60,
-                        color: "white",
-                        // backgroundColor: "green",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "left",
-                    }}
-                >
-                    {/* HEADER */}
-                </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    sx={{
+                    className="details-wrapper"
+                    style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
