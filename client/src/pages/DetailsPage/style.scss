@@ -1,0 +1,94 @@
+.details-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 70rem;
+        margin-top: 1rem;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.164);
+        height: 90%;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+            -3px -3px 5px rgba(0, 0, 0, 0.3);
+        position: relative;
+
+        .fundraiser-title {
+            width: 100%;
+            text-align: left;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .fundraiser-photo {
+            display: flex;
+            justify-content: center;
+            height: 30rem;
+            width: 100%;
+
+            .photo {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .fundraiser-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 0px 40px 20px 40px;
+
+            .fundraiser-description {
+                display: flex;
+                flex-direction: column;
+                width: 22rem;
+
+                .description-title {
+                    font-size: 50px;
+                    font-weight: bold;
+                    border-bottom: 1px solid;
+                    margin: 0;
+                    margin-top: 50px;
+                    padding-bottom: 20px;
+                }
+                .description-text {
+                    font-size: 20px;
+                    font-weight: normal;
+                }
+            }
+
+            .fundraiser-donate {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 22rem;
+                margin-top: 40px;
+                // margin-left: 30px;
+                .first-text {
+                    font-size: 40px;
+                    font-weight: bold;
+                    margin: 0;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+                .second-text {
+                    font-size: 20px;
+                    font-weight: normal;
+                    align-items: center;
+                    // margin-top: 70px;
+                }
+                .progressBar {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    color: black;
+                }
+                .donators {
+                    display: flex;
+                    align-items: center;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
