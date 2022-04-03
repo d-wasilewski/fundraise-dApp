@@ -167,11 +167,11 @@ const DetailsPage = () => {
                                         z {fundraiser.goal} ETH
                                     </Typography>
                                 </Box>
-                                {/* <ProgressBar
+                                <ProgressBar
                                     amount={fundraiser.amount}
                                     goal={fundraiser.goal}
                                     className="progressBar"
-                                /> */}
+                                />
                                 <Box sx={{ width: "100%", marginLeft: 5 }}>
                                     <Typography
                                         sx={{

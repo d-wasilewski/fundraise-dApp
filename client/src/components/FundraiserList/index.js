@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import FundraiserListElement from "../FundraiserListElement";
-import { Link } from "react-router-dom";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -29,6 +28,7 @@ const FundraiserList = () => {
             amount: 3094,
             goal: 5420,
             image: "http://placekitten.com/400/500",
+            end: "2022-05-09T00:00:00+01:00",
         },
         {
             index: 1,
@@ -38,6 +38,7 @@ const FundraiserList = () => {
             amount: 300,
             goal: 4500,
             image: "http://placekitten.com/400/480",
+            end: "2022-04-05T00:00:00+01:00",
         },
         {
             index: 2,
@@ -47,6 +48,7 @@ const FundraiserList = () => {
             amount: 1294,
             goal: 2137,
             image: "http://placekitten.com/400/450",
+            end: "2022-04-03T00:00:00+01:00",
         },
         {
             index: 3,
@@ -56,6 +58,7 @@ const FundraiserList = () => {
             amount: 1093,
             goal: 2094,
             image: "http://placekitten.com/400/600",
+            end: "2022-05-09T00:00:00+01:00",
         },
     ]);
 
@@ -68,21 +71,10 @@ const FundraiserList = () => {
             <div className="list-wrapper">
                 <div className="list">
                     {fundraiserList?.map((fundraiser) => (
-                        <Link
-                            to={`/details/${fundraiser.index}`}
+                        <FundraiserListElement
                             key={fundraiser.index}
-                            state={{ fundraiser: fundraiser }}
-                            className="link"
-                        >
-                            <FundraiserListElement
-                                key={fundraiser.index}
-                                title={fundraiser.title}
-                                description={fundraiser.description}
-                                amount={fundraiser.amount}
-                                goal={fundraiser.goal}
-                                image={fundraiser.image}
-                            />
-                        </Link>
+                            data={fundraiser}
+                        />
                     ))}
                 </div>
             </div>
