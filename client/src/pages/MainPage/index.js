@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import FundraiserList from "../components/FundraiserList";
-import NewFundraiser from "../components/NewFundraiser";
-import { FundraisingContext } from "../context/FundraisingContext";
+import FundraiserList from "./../../components/FundraiserList";
+import NewFundraiser from "./../../components/NewFundraiser";
+import Button from "./../../components/Button";
+import { FundraisingContext } from "./../../context/FundraisingContext";
 // import { useNavigate } from "react-router-dom";
 // import { CSSTransitionGroup } from 'react-transition-group';
 
@@ -46,6 +47,8 @@ const MainPage = () => {
                     Add new fundraiser
                 </button>
             )}
+
+            <Button>Lorem, ipsum.</Button>
 
             <FundraiserList />
         </div>

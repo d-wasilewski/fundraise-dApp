@@ -65,15 +65,14 @@ const FundraiserList = () => {
 
     return (
         <div>
-            <h1> List </h1>
             <div className="list-wrapper">
                 <div className="list">
                     {fundraiserList?.map((fundraiser) => (
                         <Link
                             to={`/details/${fundraiser.index}`}
                             key={fundraiser.index}
-                            style={{ textDecoration: "none" }}
                             state={{ fundraiser: fundraiser }}
+                            className="link"
                         >
                             <FundraiserListElement
                                 key={fundraiser.index}
@@ -86,34 +85,6 @@ const FundraiserList = () => {
                         </Link>
                     ))}
                 </div>
-
-                {/* <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={3}>
-                        {fundraiserlist &&
-                            fundraiserlist?.map((fundraiser) => (
-                                <Grid item xs={6} sm={6} key={fundraiser.index}>
-                                    <Item>
-                                        <h1>Photo</h1>
-                                        <h1>{fundraiser.title}</h1>
-                                        <h1>{fundraiser.descripton}</h1>
-                                        <h1>{fundraiser.raisedamount}</h1>
-                                        <h1>{fundraiser.goalamount}</h1>
-                                        <button
-                                            className="buttonGradient"
-                                            onClick={() => {
-                                                let link =
-                                                    "/details/" +
-                                                    fundraiser.index;
-                                                navigate(link);
-                                            }}
-                                        >
-                                            Details
-                                        </button>
-                                    </Item>
-                                </Grid>
-                            ))}
-                    </Grid>
-                </Box> */}
             </div>
         </div>
     );

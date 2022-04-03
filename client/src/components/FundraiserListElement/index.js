@@ -1,5 +1,6 @@
 import "./style.scss";
 import ProgressBar from "../ProgressBar";
+import Button from "../Button";
 
 const FundraiserListElement = ({ title, description, amount, goal, image }) => {
     return (
@@ -18,6 +19,7 @@ const FundraiserListElement = ({ title, description, amount, goal, image }) => {
                         goal={goal}
                         className="progressBar"
                     />
+                    {/* <Button>support</Button> */}
                 </div>
             </div>
         </div>
