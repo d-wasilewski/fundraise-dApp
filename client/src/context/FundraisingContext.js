@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import contractABI from "../utils/contractABI";
 import fundraisingContractABI from "../utils/fundingContractABI.json";
+import walletAddress from "../metamaskKey";
 
 export const FundraisingContext = React.createContext();
 
@@ -11,10 +12,7 @@ const getEthereumContract = () => {
     const contractAddress = "0x738f544dD8782a2ACb5A72b9dCC1DD3B6fF63745";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
-    const wallet = new ethers.Wallet(
-        "812746a2ec2b99ef6b0d9c1be63fecff904c35d75396b9ceda18c522cad08f85",
-        provider
-    );
+    const wallet = new ethers.Wallet(walletAddress, provider);
 
     const signer = wallet.provider.getSigner(wallet.address);
 
