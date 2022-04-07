@@ -9,7 +9,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-    const contractAddress = "0x768456bfb4E23cf47a4A57E9971F38bE75bfa57b";
+    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
     const wallet = new ethers.Wallet(walletAddress, provider);
@@ -21,7 +21,7 @@ const getEthereumContract = () => {
         contractABI.abi,
         signer
     );
-
+    console.log(lotteryContract);
     return lotteryContract;
 };
 
@@ -41,14 +41,21 @@ export const FundraisingProvider = ({ children }) => {
         setConnectedAccount(accounts[0]);
     };
 
-    const createFunding = async (amountInEth, deadline, title, description) => {
+    const createFunding = async (
+        amountInEth,
+        deadline,
+        title,
+        description,
+        url
+    ) => {
         console.log("Creating new fundraise");
         try {
             await contract.createFunding(
                 amountInEth,
                 deadline,
                 title,
-                description
+                description,
+                url
             );
         } catch (e) {
             console.log("Error: ", e);
