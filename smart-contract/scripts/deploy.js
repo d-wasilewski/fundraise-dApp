@@ -9,9 +9,10 @@ const main = async () => {
   const fundraise = await charityFunding.deploy(
     1,
     1000,
-    "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    "0x0834a891A7a4160678bfbc1Ef95Ad40231893a4b",
     "title",
-    "description"
+    "description",
+    "hhtp"
   );
   await fundraise.deployed();
 

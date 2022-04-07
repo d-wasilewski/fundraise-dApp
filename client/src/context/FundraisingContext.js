@@ -9,7 +9,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+    const contractAddress = "0xAA571f7012924eC932264CBe96d06df2f3aD054e";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
     const wallet = new ethers.Wallet(walletAddress, provider);
@@ -21,7 +21,7 @@ const getEthereumContract = () => {
         contractABI.abi,
         signer
     );
-    console.log(lotteryContract);
+
     return lotteryContract;
 };
 
@@ -115,6 +115,18 @@ export const FundraisingProvider = ({ children }) => {
         });
     };
 
+    const approveFundraiser = async (address) => {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const newContract = new ethers.Contract(
+            address,
+            fundraisingContractABI.abi,
+            signer
+        );
+
+        await newContract.approve();
+    };
+
     const connectWallet = async () => {
         try {
             if (!ethereum) return alert("Please install metamask!");
@@ -132,6 +144,7 @@ export const FundraisingProvider = ({ children }) => {
 
     useEffect(async () => {
         checkIfWalletIsConnected();
+
         // createFunding(1, 1000);
         await getListOfContracts();
     }, []);
@@ -145,6 +158,7 @@ export const FundraisingProvider = ({ children }) => {
                 getNewContractGivenItsAddress,
                 createFunding,
                 donate,
+                approveFundraiser,
             }}
         >
             {children}
