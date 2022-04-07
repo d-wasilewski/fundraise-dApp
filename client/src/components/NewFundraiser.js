@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { FundraisingContext } from "../context/FundraisingContext";
+import { create } from "ipfs-http-client";
+
+const client = create("https://ipfs.infura.io:5001/api/v0");
 
 const NewFundraiser = (props) => {
     const { connectWallet, connectedAccount, createFunding } =
@@ -10,6 +13,7 @@ const NewFundraiser = (props) => {
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
     const [deadline, setDeadline] = useState(0);
+    const [imagePath, setImagePath] = useState(``);
 
     function addNew() {
         // if (
@@ -19,11 +23,23 @@ const NewFundraiser = (props) => {
         //   date > Date.now()
         // ) {
 
-        createFunding(amount, Date.parse(deadline), title, description);
+        createFunding(amount, Date.parse(deadline), title, description,imagePath);
 
         props.parentCallback(false);
         // }
     }
+
+    const uploadPhoto = async (e) => {
+        const file = e.target.files[0];
+        try {
+            const added = await client.add(e.target.files[0]);
+            console.log(added.path);
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+            setImagePath(url);
+        } catch (error) {
+            console.log("Error while uploading the photo");
+        }
+    };
 
     function cancel() {
         props.parentCallback(false);
@@ -46,7 +62,14 @@ const NewFundraiser = (props) => {
                 ></input>
             </div>
             <div>
-                <label>Upload photo</label>
+                <input
+                    type="file"
+                    name="myImage"
+                    onChange={(event) => {
+                        uploadPhoto(event);
+                    }}
+                />
+                {imagePath && <img src={imagePath} width="600px" />}
             </div>
             <div>
                 <label>Amount</label>

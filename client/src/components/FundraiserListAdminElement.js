@@ -1,12 +1,12 @@
-import "./style.scss";
-import ProgressBar from "../ProgressBar";
-import Button from "../Button";
-import RoundIconButton from "../RoundIconButton";
+import ProgressBar from "./ProgressBar";
+import Button from "./Button";
+import RoundIconButton from "./RoundIconButton";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Countdown from "react-countdown";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { FundraisingContext } from "../context/FundraisingContext";
 
 const FundraiserListElement = ({ data }) => {
     const [balance, setBalance] = useState(0);
@@ -16,8 +16,9 @@ const FundraiserListElement = ({ data }) => {
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState(``);
 
+    const { approveFundraiser } = useContext(FundraisingContext);
+
     useEffect(async () => {
-        console.log(data);
         const dataBalance = await data.raisedAmount();
         setBalance(ethers.utils.formatEther(dataBalance));
         const dataGoal = await data.goal();
@@ -30,8 +31,6 @@ const FundraiserListElement = ({ data }) => {
         setDescription(dataDescription);
         const dataUrl = await data.urlPhoto();
         setImageUrl(dataUrl);
-        const dataApp = await data.approved();
-        console.log(dataApp);
     }, []);
 
     return (
@@ -98,6 +97,9 @@ const FundraiserListElement = ({ data }) => {
                     }`}</p>
                     <ProgressBar amount={balance} goal={goal} />
                 </div>
+                <button onClick={() => approveFundraiser(data.address)}>
+                    Approve fundraiser
+                </button>
             </div>
         </div>
     );
