@@ -9,7 +9,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-    const contractAddress = "0xAA571f7012924eC932264CBe96d06df2f3aD054e";
+    const contractAddress = "0x477f514656E3724909a3244053c1758988055398";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
     const wallet = new ethers.Wallet(walletAddress, provider);
@@ -26,12 +26,11 @@ const getEthereumContract = () => {
 };
 
 const contract = getEthereumContract();
+console.log(contract);
 
 export const FundraisingProvider = ({ children }) => {
     const [connectedAccount, setConnectedAccount] = useState("");
     const [contractsList, setContractsList] = useState([]);
-
-    // console.log(contract);
 
     const checkIfWalletIsConnected = async () => {
         if (!ethereum) return alert("Please install metamask!");
@@ -64,15 +63,13 @@ export const FundraisingProvider = ({ children }) => {
 
     const getListOfContracts = async () => {
         const fundings = await contract.allFundings();
-        //console.log("List of addresses", fundings);
 
-        // Example: creates contract instances on every fundraise address
+        // creates contract instances on every fundraise address
         const contracts = fundings.map((a) => {
             const n = getNewContractGivenItsAddress(a);
             return n;
         });
 
-        //console.log("Contracts: ", contracts);
         setContractsList(contracts);
 
         return contracts;
@@ -145,8 +142,23 @@ export const FundraisingProvider = ({ children }) => {
     useEffect(async () => {
         checkIfWalletIsConnected();
 
-        // createFunding(1, 1000);
         await getListOfContracts();
+    }, []);
+
+    useEffect(() => {
+        const onNewFundraiser = async () => {
+            await getListOfContracts();
+        };
+
+        if (contract) {
+            contract.on("newFundingEvent", onNewFundraiser);
+        }
+
+        return () => {
+            if (contract) {
+                contract.off("newFundingEvent", onNewFundraiser);
+            }
+        };
     }, []);
 
     return (

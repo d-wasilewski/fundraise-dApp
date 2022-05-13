@@ -1,9 +1,6 @@
 import { useLocation, useParams } from "react-router-dom";
-import { Grid, Box, Paper, Typography, Button, TextField } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
 import { FundraisingContext } from "../../context/FundraisingContext";
-import ContributorsIcon from "../../icons/friends.png";
 import ProgressBar from "../../components/ProgressBar";
 import "./style.scss";
 import { ethers } from "ethers";
@@ -11,8 +8,8 @@ import { FaUserFriends } from "react-icons/fa";
 
 const DetailsPage = () => {
     const [donatingAmount, setDonatingAmount] = useState("");
+    const [contract, setContract] = useState(null);
     const { id } = useParams();
-    const [contract, setContract] = useState(undefined);
     const {
         connectWallet,
         connectedAccount,
@@ -33,10 +30,25 @@ const DetailsPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Wplaciles " + contract.address);
-        console.log("Wplaciles " + donatingAmount);
         await donate(donatingAmount, contract.address);
     };
+
+    useEffect(() => {
+        const onNewDonation = async () => {
+            const dataBalance = await contract.raisedAmount();
+            setBalance(ethers.utils.formatEther(dataBalance));
+        };
+
+        if (contract) {
+            contract.on("ContributeEvent", onNewDonation);
+        }
+
+        return () => {
+            if (contract) {
+                contract.off("ContributeEvent", onNewDonation);
+            }
+        };
+    }, []);
 
     useEffect(async () => {
         let c = await getNewContractGivenItsAddress(id);
@@ -55,7 +67,6 @@ const DetailsPage = () => {
         setDescription(dataDescription);
 
         setContract(c);
-        console.log(c);
     }, []);
 
     return (
@@ -68,10 +79,7 @@ const DetailsPage = () => {
                         className="photo"
                     />
                 </div>
-                <div className="fundraiser-title">
-                    {/* {fundraiser.title} */}
-                    Fundraiser title
-                </div>
+                <div className="fundraiser-title">{title}</div>
                 <div className="fundraiser-info">
                     <div className="fundraiser-description">
                         <p className="description-title">Description</p>
