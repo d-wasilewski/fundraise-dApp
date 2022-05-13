@@ -4,9 +4,12 @@ pragma solidity >=0.6.0 <0.9.0;
 contract FundingCreator {
     CharityFunding[] public fundings;
 
+    event newFundingEvent();
+
     function createFunding(uint fundingGoal, uint fundingDeadline, string memory title, string memory description, string memory urlPhoto ) public {
         CharityFunding charityFunding = new CharityFunding(fundingGoal, fundingDeadline, msg.sender, title, description,urlPhoto);
         fundings.push(charityFunding);
+        emit newFundingEvent();
     }
 
     function allFundings() public view returns (CharityFunding[] memory) {
@@ -25,7 +28,6 @@ contract CharityFunding {
     string public description;
     string public urlPhoto;
     bool public approved;
-
 
 
     mapping(address => uint) contributors;
@@ -55,7 +57,6 @@ contract CharityFunding {
         raisedAmount += msg.value;
 
         emit ContributeEvent(msg.sender, msg.value);
-
     }
 
     receive() external payable {
