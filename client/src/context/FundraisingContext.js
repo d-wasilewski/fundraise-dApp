@@ -26,7 +26,6 @@ const getEthereumContract = () => {
 };
 
 const contract = getEthereumContract();
-console.log(contract);
 
 export const FundraisingProvider = ({ children }) => {
     const [connectedAccount, setConnectedAccount] = useState("");
@@ -47,7 +46,6 @@ export const FundraisingProvider = ({ children }) => {
         description,
         url
     ) => {
-        console.log("Creating new fundraise");
         try {
             await contract.createFunding(
                 amountInEth,

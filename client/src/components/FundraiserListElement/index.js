@@ -17,7 +17,6 @@ const FundraiserListElement = ({ data }) => {
     const [imageUrl, setImageUrl] = useState(``);
 
     useEffect(async () => {
-        console.log(data);
         const dataBalance = await data.raisedAmount();
         setBalance(ethers.utils.formatEther(dataBalance));
         const dataGoal = await data.goal();
@@ -31,7 +30,6 @@ const FundraiserListElement = ({ data }) => {
         const dataUrl = await data.urlPhoto();
         setImageUrl(dataUrl);
         const dataApp = await data.approved();
-        console.log(dataApp);
     }, []);
 
     return (

@@ -6,11 +6,20 @@ import { FundraisingContext } from "../context/FundraisingContext";
 const AdminPage = () => {
     const { contractsList } = useContext(FundraisingContext);
     const [fundraiserList, setFundraiserList] = useState(contractsList);
-    const [notApproved, setNotApproved] = useState([]);
 
     useEffect(() => {
-        setFundraiserList(contractsList);
-        // contract -> approved()
+        const setData = async () => {
+            const approved = await Promise.all(
+                contractsList.map(async (x) => {
+                    const isApproved = await x.approved();
+                    if (!isApproved) {
+                        return x;
+                    }
+                })
+            );
+            setFundraiserList(approved.filter((x) => x !== undefined));
+        };
+        setData();
     }, [contractsList]);
 
     return (
