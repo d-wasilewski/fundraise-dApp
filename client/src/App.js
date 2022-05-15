@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import { FundraisingContext } from "./context/FundraisingContext";
 import { useContext } from "react";
 import { adminList } from "./admins";
+import Protected from "./components/Protected";
 
 function App() {
     const { connectedAccount } = useContext(FundraisingContext);
@@ -14,10 +15,18 @@ function App() {
         <>
             <Router>
                 <NavBar />
+
                 <Routes>
-                    <Route path="/admin" element={<AdminPage />} />
                     <Route path="/" element={<MainPage />} />
                     <Route path="/details/:id" element={<DetailsPage />} />
+                    <Route
+                        path="/admin"
+                        element={
+                            <Protected>
+                                <AdminPage />
+                            </Protected>
+                        }
+                    />
                 </Routes>
             </Router>
         </>
