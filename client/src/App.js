@@ -4,8 +4,12 @@ import AdminPage from "./pages/AdminPage";
 import DetailsPage from "./pages/DetailsPage";
 import MainPage from "./pages/MainPage/index.js";
 import NavBar from "./components/NavBar";
+import { FundraisingContext } from "./context/FundraisingContext";
+import { useContext } from "react";
+import { adminList } from "./admins";
 
 function App() {
+    const { connectedAccount } = useContext(FundraisingContext);
     return (
         <>
             <Router>

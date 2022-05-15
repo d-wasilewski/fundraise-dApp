@@ -91,15 +91,24 @@ const FundraiserListElement = ({ data }) => {
                 </Link>
 
                 <div className="item">
-                    <h1>{title}</h1>
+                    <h1>{`${title.substring(0, 20)}${
+                        title.length < 20 ? "" : "..."
+                    }`}</h1>
                     <p>{`${description.substring(0, 120)}${
                         description.length < 120 ? "" : "..."
                     }`}</p>
                     <ProgressBar amount={balance} goal={goal} />
+                    <Button
+                        onClick={() => approveFundraiser(data.address)}
+                        style={{
+                            zIndex: 20,
+                            width: "100%",
+                            marginTop: ".5rem",
+                        }}
+                    >
+                        Approve fundraiser
+                    </Button>
                 </div>
-                <button onClick={() => approveFundraiser(data.address)}>
-                    Approve fundraiser
-                </button>
             </div>
         </div>
     );

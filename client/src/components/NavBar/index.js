@@ -1,8 +1,8 @@
 import "./style.scss";
 import Button from "../Button";
 import SearchBar from "../SearchBar";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Protected from "../Protected";
 
 const NavBar = () => {
     // const newFundraiserFlag = useContext(newFundraiserPopupFlag);
@@ -13,9 +13,11 @@ const NavBar = () => {
     return (
         <div className="navbar">
             <SearchBar className="search" />
-            <Button className="button" onClick={navigateToAdminPage}>
-                Admin page
-            </Button>
+            <Protected>
+                <Button className="button" onClick={navigateToAdminPage}>
+                    Admin page
+                </Button>
+            </Protected>
             <Button className="button">Connect wallet</Button>
         </div>
     );

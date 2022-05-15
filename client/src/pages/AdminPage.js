@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import FundraiserListAdminElement from "../components/FundraiserListAdminElement";
 import { FundraisingContext } from "../context/FundraisingContext";
+import Protected from "../components/Protected";
 
 const AdminPage = () => {
     const { contractsList } = useContext(FundraisingContext);
@@ -23,20 +24,22 @@ const AdminPage = () => {
     }, [contractsList]);
 
     return (
-        <div>
-            <div className="list-wrapper">
-                <div className="list">
-                    {fundraiserList?.map((fundraiser) => {
-                        return (
-                            <FundraiserListAdminElement
-                                key={fundraiser.address}
-                                data={fundraiser}
-                            />
-                        );
-                    })}
+        <Protected>
+            <div>
+                <div className="list-wrapper">
+                    <div className="list">
+                        {fundraiserList?.map((fundraiser) => {
+                            return (
+                                <FundraiserListAdminElement
+                                    key={fundraiser.address}
+                                    data={fundraiser}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Protected>
     );
 };
 
