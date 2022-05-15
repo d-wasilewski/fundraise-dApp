@@ -2,15 +2,15 @@ import "./style.scss";
 import Button from "../Button";
 import SearchBar from "../SearchBar";
 import { useNavigate } from "react-router-dom";
+import Protected from "../Protected";
 import { useContext } from "react";
-import { adminList } from "../../admins";
 import { FundraisingContext } from "../../context/FundraisingContext";
+import { adminList } from "../../admins";
 
 const NavBar = () => {
-    // const newFundraiserFlag = useContext(newFundraiserPopupFlag);
-    const { connectedAccount } = useContext(FundraisingContext);
-
+    const { connectWallet, connectedAccount } = useContext(FundraisingContext);
     const navigate = useNavigate();
+  
     function navigateToAdminPage() {
         navigate("/admin");
     }
@@ -32,7 +32,13 @@ const NavBar = () => {
                     Admin page
                 </Button>
             )}
-            <Button className="button">Connect wallet</Button>
+            <Button className="button" onClick={connectWallet}>
+                {connectedAccount
+                    ? connectedAccount.slice(0, 5) +
+                      "..." +
+                      connectedAccount.slice(-5)
+                    : "Connect wallet"}
+            </Button>
         </div>
     );
 };
