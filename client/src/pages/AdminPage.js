@@ -24,22 +24,20 @@ const AdminPage = () => {
     }, [contractsList]);
 
     return (
-        <Protected>
-            <div>
-                <div className="list-wrapper">
-                    <div className="list">
-                        {fundraiserList?.map((fundraiser) => {
-                            return (
-                                <FundraiserListAdminElement
-                                    key={fundraiser.address}
-                                    data={fundraiser}
-                                />
-                            );
-                        })}
-                    </div>
+        <div>
+            <div className="list-wrapper">
+                <div className="list">
+                    {fundraiserList?.map((fundraiser) => {
+                        return (
+                            <FundraiserListAdminElement
+                                key={fundraiser.address}
+                                data={fundraiser}
+                            />
+                        );
+                    })}
                 </div>
             </div>
-        </Protected>
+        </div>
     );
 };
 

@@ -8,10 +8,7 @@ const Protected = ({ children }) => {
     const { connectedAccount } = useContext(FundraisingContext);
     adminList.forEach((admin) => {
         if (admin.toLowerCase() == connectedAccount.toLowerCase()) {
-            console.log("passed");
             check = true;
-        } else {
-            console.log("failed");
         }
     });
     return check ? children : <Navigate to="/" replace />;
