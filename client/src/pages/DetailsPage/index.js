@@ -5,6 +5,7 @@ import ProgressBar from "../../components/ProgressBar";
 import "./style.scss";
 import { ethers } from "ethers";
 import { FaUserFriends } from "react-icons/fa";
+import Button from "../../components/Button";
 
 const DetailsPage = () => {
     const [donatingAmount, setDonatingAmount] = useState("");
@@ -32,6 +33,10 @@ const DetailsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await donate(donatingAmount, contract.address);
+    };
+
+    const handleWithdrawal = async () => {
+        await contract.withdraw();
     };
 
     useEffect(() => {
@@ -62,8 +67,8 @@ const DetailsPage = () => {
         const days = Math.floor((date - Date.now()) / (24 * 60 * 60 * 1000));
         setDeadline(days);
         const dataOwner = await c.admin();
-        setOwner(ethers.utils.formatEther(dataOwner));
-
+        setOwner(dataOwner);
+        console.log("Owner: ", dataOwner);
         const dataTitle = await c.title();
         setTitle(dataTitle);
         const dataDescription = await c.description();
@@ -106,12 +111,19 @@ const DetailsPage = () => {
                             className="progressBar"
                         />
 
-                        {connectedAccount ? (
+                        {}
+                        {connectedAccount.toLowerCase() ===
+                        owner.toLowerCase() ? (
+                            <Button onClick={handleWithdrawal}>
+                                Withdraw funds
+                            </Button>
+                        ) : connectedAccount ? (
                             <>
                                 <form onSubmit={handleSubmit} className="form">
                                     <input
                                         className="amountInput"
-                                        type="text"
+                                        type="number"
+                                        step={"0.001"}
                                         onChange={handleInputChange}
                                         name="amount"
                                         required
@@ -119,7 +131,7 @@ const DetailsPage = () => {
                                     <input
                                         className="buttonGradient submitButton"
                                         type="submit"
-                                        value="Submit"
+                                        value="Deposit"
                                     />
                                 </form>
                             </>
