@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 50px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    // background-color: white;
+    width: 32rem;
+
+    .formElement {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        width: 100%;
+
+        .formLabel {
+            font-size: 1.5rem;
+            width: 30%;
+            height: 2rem;
+        }
+
+        .formInput {
+            border-radius: 0.5rem;
+            height: 2rem;
+            width: 70%;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .formPhotoInput {
+            border-radius: 0.5rem;
+            height: 2rem;
+            color: white;
+            // width: 70%;
+            // min-width: 70%;
+            max-width: auto;
+        }
+
+        .inputPhoto {
+            width: 100px;
+            height: auto;
+        }
+    }
+}

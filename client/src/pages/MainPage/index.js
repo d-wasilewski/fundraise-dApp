@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import FundraiserList from "./../../components/FundraiserList";
-import NewFundraiser from "./../../components/NewFundraiser";
+import NewFundraiser from "../../components/NewFundraiser/NewFundraiser";
 import Button from "./../../components/Button";
 import { FundraisingContext } from "./../../context/FundraisingContext";
 import SearchBar from "./../../components/SearchBar";
+import "./style.scss";
 
 // import { useNavigate } from "react-router-dom";
 // import { CSSTransitionGroup } from 'react-transition-group';
@@ -13,10 +14,11 @@ const MainPage = () => {
 
     const { connectWallet, connectedAccount } = useContext(FundraisingContext);
 
-    const [newFoundraiserPopup, setnewFoundraiserPopup] = useState(false);
+    const [newFundraiserPopup, setNewFundraiserPopup] = useState(false);
+    const newFundraiserPopupFlag = createContext(setNewFundraiserPopup);
 
     const callbackFunction = (status) => {
-        setnewFoundraiserPopup(status);
+        setNewFundraiserPopup(status);
     };
 
     return (
@@ -32,12 +34,14 @@ const MainPage = () => {
                 {connectedAccount ? connectedAccount : "CONNECT WALLET"}
             </button> */}
 
-            {newFoundraiserPopup ? (
-                <NewFundraiser parentCallback={callbackFunction} />
+            {newFundraiserPopup ? (
+                <div className="formContainer">
+                    <NewFundraiser parentCallback={callbackFunction} />
+                </div>
             ) : (
                 <button
                     className="buttonGradient"
-                    onClick={() => setnewFoundraiserPopup(!newFoundraiserPopup)}
+                    onClick={() => setNewFundraiserPopup(!newFundraiserPopup)}
                 >
                     Add new fundraiser
                 </button>

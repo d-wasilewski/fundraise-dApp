@@ -1,6 +1,7 @@
+import "./style.scss";
 import { useState } from "react";
 import { useContext } from "react";
-import { FundraisingContext } from "../context/FundraisingContext";
+import { FundraisingContext } from "../../context/FundraisingContext";
 import { create } from "ipfs-http-client";
 
 const client = create("https://ipfs.infura.io:5001/api/v0");
@@ -23,7 +24,13 @@ const NewFundraiser = (props) => {
         //   date > Date.now()
         // ) {
 
-        createFunding(amount, Date.parse(deadline), title, description,imagePath);
+        createFunding(
+            amount,
+            Date.parse(deadline),
+            title,
+            description,
+            imagePath
+        );
 
         props.parentCallback(false);
         // }
@@ -31,6 +38,7 @@ const NewFundraiser = (props) => {
 
     const uploadPhoto = async (e) => {
         const file = e.target.files[0];
+        console.log(file);
         try {
             const added = await client.add(e.target.files[0]);
             console.log(added.path);
@@ -46,46 +54,51 @@ const NewFundraiser = (props) => {
     }
 
     return (
-        <div>
-            <div>
-                <label>Title</label>
+        <div className="container">
+            <div className="formElement">
+                <label className="formLabel">Title</label>
                 <input
+                    className="formInput"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 ></input>
             </div>
-            <div>
-                <label>Description</label>
+            <div className="formElement">
+                <label className="formLabel">Description</label>
                 <input
+                    className="formInput"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 ></input>
             </div>
-            <div>
+            <div className="formElement">
+                <label className="formLabel">Photo</label>
                 <input
+                    className="formPhotoInput"
                     type="file"
                     name="myImage"
                     onChange={(event) => {
                         uploadPhoto(event);
                     }}
                 />
-                {imagePath && <img src={imagePath} width="600px" />}
+                {imagePath && <img className="inputPhoto" src={imagePath} />}
             </div>
-            <div>
-                <label>Amount</label>
+            <div className="formElement">
+                <label className="formLabel">Amount</label>
                 <input
+                    className="formInput"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                 ></input>
             </div>
-            <div>
-                <label>End date</label>
+            <div className="formElement">
+                <label className="formLabel">End date</label>
                 <input
+                    className="formInput"
                     type="date"
                     value={deadline}
                     onChange={(e) => setDeadline(e.target.value)}
                 ></input>
-                <label>days</label>
             </div>
 
             {connectedAccount ? (
