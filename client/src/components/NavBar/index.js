@@ -16,11 +16,13 @@ const NavBar = () => {
 
     let check = false;
 
-    adminList.forEach((admin) => {
-        if (admin.toLowerCase() == connectedAccount.toLowerCase()) {
-            check = true;
-        }
-    });
+    if (connectedAccount) {
+        adminList.forEach((admin) => {
+            if (admin.toLowerCase() == connectedAccount.toLowerCase()) {
+                check = true;
+            }
+        });
+    }
 
     return (
         <div className="navbar">

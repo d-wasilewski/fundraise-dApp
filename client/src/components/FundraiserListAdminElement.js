@@ -90,12 +90,12 @@ const FundraiserListElement = ({ data }) => {
                     </RoundIconButton>
                 </Link>
 
-                <div className="item">
+                <div className="item" style={{ height: "5rem" }}>
                     <h1>{`${title.substring(0, 20)}${
                         title.length < 20 ? "" : "..."
                     }`}</h1>
-                    <p>{`${description.substring(0, 120)}${
-                        description.length < 120 ? "" : "..."
+                    <p>{`${description.substring(0, 20)}${
+                        description.length < 20 ? "" : "..."
                     }`}</p>
                     <ProgressBar amount={balance} goal={goal} />
                     <Button
@@ -104,6 +104,7 @@ const FundraiserListElement = ({ data }) => {
                             zIndex: 20,
                             width: "100%",
                             marginTop: ".5rem",
+                            // bottom: "1rem",
                         }}
                     >
                         Approve fundraiser
