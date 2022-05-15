@@ -2,7 +2,6 @@ import "./style.scss";
 import Button from "../Button";
 import SearchBar from "../SearchBar";
 import { useNavigate } from "react-router-dom";
-import Protected from "../Protected";
 import { useContext } from "react";
 import { FundraisingContext } from "../../context/FundraisingContext";
 import { adminList } from "../../admins";
@@ -10,24 +9,23 @@ import { adminList } from "../../admins";
 const NavBar = () => {
     const { connectWallet, connectedAccount } = useContext(FundraisingContext);
     const navigate = useNavigate();
-  
+
     function navigateToAdminPage() {
         navigate("/admin");
     }
 
-    const checkAdmin = () => {
-        adminList.forEach((admin) => {
-            if (admin.toLowerCase() == connectedAccount.toLowerCase()) {
-                return true;
-            }
-        });
-        return false;
-    };
+    let check = false;
+
+    adminList.forEach((admin) => {
+        if (admin.toLowerCase() == connectedAccount.toLowerCase()) {
+            check = true;
+        }
+    });
 
     return (
         <div className="navbar">
             <SearchBar className="search" />
-            {checkAdmin() && (
+            {check && (
                 <Button className="button" onClick={navigateToAdminPage}>
                     Admin page
                 </Button>

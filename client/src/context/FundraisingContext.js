@@ -9,7 +9,7 @@ export const FundraisingContext = React.createContext();
 const { ethereum } = window;
 
 const getEthereumContract = () => {
-    const contractAddress = "0x477f514656E3724909a3244053c1758988055398";
+    const contractAddress = "0x3922b32668C9Ca5EA1718927d46a3DF744F20b25";
     const provider = new ethers.providers.Web3Provider(ethereum);
     // const signer = provider.getSigner();
     const wallet = new ethers.Wallet(walletAddress, provider);
@@ -60,17 +60,21 @@ export const FundraisingProvider = ({ children }) => {
     };
 
     const getListOfContracts = async () => {
-        const fundings = await contract.allFundings();
+        try {
+            const fundings = await contract.allFundings();
 
-        // creates contract instances on every fundraise address
-        const contracts = fundings.map((a) => {
-            const n = getNewContractGivenItsAddress(a);
-            return n;
-        });
+            // creates contract instances on every fundraise address
+            const contracts = fundings.map((a) => {
+                const n = getNewContractGivenItsAddress(a);
+                return n;
+            });
 
-        setContractsList(contracts);
+            setContractsList(contracts);
 
-        return contracts;
+            return contracts;
+        } catch (e) {
+            console.log("Error:", e);
+        }
     };
 
     const getNewContractGivenItsAddress = (address) => {
