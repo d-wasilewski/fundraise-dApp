@@ -23,7 +23,9 @@ const FundraiserList = () => {
                     }
                 })
             );
-            setFundraiserList(approved.filter((x) => x !== undefined));
+            setFundraiserList(
+                approved.filter((x) => x !== undefined).reverse()
+            );
         };
         setData();
     }, [contractsList]);
