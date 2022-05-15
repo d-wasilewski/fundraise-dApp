@@ -23,6 +23,7 @@ const DetailsPage = () => {
     const [owner, setOwner] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [imageUrl, setImageUrl] = useState(``);
 
     const handleInputChange = (e) => {
         setDonatingAmount(e.target.value);
@@ -57,7 +58,9 @@ const DetailsPage = () => {
         const dataGoal = await c.goal();
         setGoal(ethers.utils.formatEther(dataGoal));
         const dataDeadline = await c.deadline();
-        setDeadline(ethers.utils.formatEther(dataDeadline));
+        const date = new Date(parseInt(dataDeadline));
+        const days = Math.floor((date - Date.now()) / (24 * 60 * 60 * 1000));
+        setDeadline(days);
         const dataOwner = await c.admin();
         setOwner(ethers.utils.formatEther(dataOwner));
 
@@ -65,7 +68,8 @@ const DetailsPage = () => {
         setTitle(dataTitle);
         const dataDescription = await c.description();
         setDescription(dataDescription);
-
+        const dataUrl = await c.urlPhoto();
+        setImageUrl(dataUrl);
         setContract(c);
     }, []);
 
@@ -74,7 +78,7 @@ const DetailsPage = () => {
             <div className="container">
                 <div className="fundraiser-photo">
                     <img
-                        src="http://placekitten.com/400/600"
+                        src={imageUrl}
                         alt="FundraiserPhoto"
                         className="photo"
                     />
@@ -92,20 +96,16 @@ const DetailsPage = () => {
                                 out of {goal} ETH
                             </span>
                         </p>
+                        <p className="first-text">
+                            {deadline}{" "}
+                            <span className="second-text">days left</span>
+                        </p>
                         <ProgressBar
                             amount={balance}
                             goal={goal}
                             className="progressBar"
                         />
-                        <p className="first-text">
-                            N <span className="second-text">days left</span>
-                        </p>
-                        <div className="donators">
-                            <FaUserFriends size={40} />
-                            <p className="first-text">
-                                N <span className="second-text">donators</span>
-                            </p>
-                        </div>
+
                         {connectedAccount ? (
                             <>
                                 <form onSubmit={handleSubmit} className="form">
@@ -117,7 +117,7 @@ const DetailsPage = () => {
                                         required
                                     />
                                     <input
-                                        className="submitButton"
+                                        className="buttonGradient submitButton"
                                         type="submit"
                                         value="Submit"
                                     />

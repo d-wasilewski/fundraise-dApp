@@ -8,18 +8,19 @@
         width: 70rem;
         margin-top: 1rem;
         color: white;
-        background-color: rgba(255, 255, 255, 0.164);
+        background-color: rgba(0, 0, 0, 0.4);
         height: 90%;
         border-radius: 1.5rem;
         overflow: hidden;
         box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
             -3px -3px 5px rgba(0, 0, 0, 0.3);
         position: relative;
+        padding: 0;
 
         .fundraiser-title {
-            width: 100%;
+            width: 80%;
             padding: 20px 40px 20px 40px;
-            text-align: left;
+            text-align: center;
             font-size: 50px;
             font-weight: bold;
         }
@@ -37,35 +38,35 @@
         }
         .fundraiser-info {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             padding: 0px 40px 20px 40px;
+            width: 80%;
 
             .fundraiser-description {
                 display: flex;
                 flex-direction: column;
-                width: 22rem;
-
+                width: 40%;
+                padding: 0;
                 .description-title {
                     font-size: 50px;
                     font-weight: bold;
-                    border-bottom: 1px solid;
+                    // border-bottom: 1px solid;
                     margin: 0;
-                    margin-top: 50px;
                     padding-bottom: 20px;
                 }
                 .description-text {
                     font-size: 20px;
                     font-weight: normal;
+                    max-width: 100%;
                 }
             }
 
             .fundraiser-donate {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                width: 22rem;
-                margin-top: 40px;
-                // margin-left: 30px;
+                justify-content: space-between;
+                width: 40%;
+                height: 22rem;
                 .first-text {
                     font-size: 40px;
                     font-weight: bold;
@@ -77,7 +78,6 @@
                     font-size: 20px;
                     font-weight: normal;
                     align-items: center;
-                    // margin-top: 70px;
                 }
                 .progressBar {
                     margin-top: 10px;
@@ -88,6 +88,24 @@
                     display: flex;
                     align-items: center;
                     margin: 0;
+                }
+                .form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+
+                    .amountInput {
+                        border-radius: 0.5rem;
+                        height: 2rem;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 1.5rem;
+                    }
+                    .submitButton {
+                        margin-top: 1rem;
+                        width: 10rem;
+                    }
                 }
             }
         }

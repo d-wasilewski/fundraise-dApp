@@ -73,14 +73,20 @@ const NewFundraiser = (props) => {
             </div>
             <div className="formElement">
                 <label className="formLabel">Photo</label>
-                <input
-                    className="formPhotoInput"
-                    type="file"
-                    name="myImage"
-                    onChange={(event) => {
-                        uploadPhoto(event);
-                    }}
-                />
+                <div className="innerPhotoInput">
+                    <label className="photoInput" htmlFor="photoInput">
+                        Choose a photo
+                    </label>
+                    <input
+                        id="photoInput"
+                        className="formPhotoInput"
+                        type="file"
+                        name="myImage"
+                        onChange={(event) => {
+                            uploadPhoto(event);
+                        }}
+                    />
+                </div>
                 {imagePath && <img className="inputPhoto" src={imagePath} />}
             </div>
             <div className="formElement">
@@ -102,7 +108,7 @@ const NewFundraiser = (props) => {
             </div>
 
             {connectedAccount ? (
-                <div>
+                <div className="formButtons">
                     <button onClick={addNew} className={"buttonGradient"}>
                         Create new fund-raiser
                     </button>

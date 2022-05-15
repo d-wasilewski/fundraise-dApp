@@ -6,12 +6,11 @@
     margin-top: 50px;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.4);
-    // background-color: white;
     width: 32rem;
 
     .formElement {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         padding-bottom: 1rem;
         width: 100%;
@@ -30,18 +29,41 @@
             font-size: 1.5rem;
         }
 
-        .formPhotoInput {
-            border-radius: 0.5rem;
+        .innerPhotoInput {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .photoInput {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: bold;
             height: 2rem;
-            color: white;
-            // width: 70%;
-            // min-width: 70%;
-            max-width: auto;
+            width: 10rem;
+            background-image: linear-gradient(60deg, #00c4ff, #ff42a3);
+            border-radius: 10000px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .formPhotoInput {
+            display: none;
         }
 
         .inputPhoto {
             width: 100px;
             height: auto;
         }
+    }
+
+    .formButtons {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
     }
 }
